@@ -11,24 +11,28 @@
 </head>
 <body>
 <h1>Fifa World Cup Qatar 2022</h1>
-<p>${ticket.getWedstrijd().toString()}</p>
-<p>aantal tickets bechikbaar : ${ticket.getTickets()}</p>
+<p>${wedstrijd.toString()}</p>
+<p>aantal tickets bechikbaar : ${wedstrijd.getTickets_left()}</p>
 <form:form method="POST" modelAttribute="ticketOrder">
     <p>
         <label>email: </label>
         <form:input path="email"/>
+        <form:errors path="email" cssStyle="color: red"/>
     </p>
     <p>
         <label>aantal tickets: </label>
         <form:input path="aantalTickets"/>
+        <form:errors path="aantalTickets" cssStyle="color: red" />
     </p>
     <p>
         <label>voetbalCode1 : </label>
         <form:input path="voetbalCode1"/>
+        <form:errors path="voetbalCode1" cssStyle="color: red"/>
     </p>
     <p>
         <label>voetbalCode2: </label>
         <form:input path="voetbalCode2"/>
+        <form:errors path="voetbalCode2" cssStyle="color: red"/>
     </p>
     <button type="submit">
         Koop

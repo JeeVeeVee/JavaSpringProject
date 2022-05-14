@@ -1,4 +1,4 @@
-package com.example.springboottutorial.domain;
+package domain;
 
 //Aantal tickets beschikbaar per wedstrijd
 public class WedstrijdTicket {

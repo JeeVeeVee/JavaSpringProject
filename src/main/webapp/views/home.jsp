@@ -11,10 +11,10 @@
 </head>
 <body>
 <h1>Fifa World Cup Qatar 2022</h1>
-<form:form method="POST"  modelAttribute="stadion">
-    <label for="stadions">pick a stadium</label>
-    <form:select name="stadions" id="stadions" path="name">
-        <form:options items="${stadionlist}"/>
+<form:form method="POST" modelAttribute="stadion">
+    <label>pick a stadium</label>
+    <form:select  path="id">
+        <form:options items="${stadionlist}" itemValue="id"/>
         <%--<c:forEach items="${stadionlist}" var="stadion">
             <option value="${stadion.toString()}">${stadion.toString()}</option>
         </c:forEach>--%>

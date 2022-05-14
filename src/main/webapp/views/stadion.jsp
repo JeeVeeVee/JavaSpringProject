@@ -11,7 +11,8 @@
 </head>
 <body>
 <h1>Fifa World Cup Qatar 2022</h1>
-<h2>${ticket.get}</h2>
+<h1>${stadion}</h1>
+<h2>${tickets}</h2>
 <table>
     <tr>
         <th>Nr</th>
@@ -21,7 +22,7 @@
         <th>Tickets</th>
     </tr>
     <c:forEach items="${tickets}" var="ticket">
-        <c:set var="match" value="${ticket.getWedstrijd()}"/>
+        <c:set var="match" value="${ticket}"/>
         <tr>
             <td>
                 ${match.id}
@@ -36,7 +37,7 @@
                 ${match.getUur()}
             </td>
             <td>
-                ${ticket.getTickets()}
+                ${ticket.getTickets_left()}
             </td>
         </tr>
     </c:forEach>

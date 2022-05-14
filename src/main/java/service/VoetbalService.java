@@ -1,6 +1,6 @@
-package com.example.springboottutorial.service;
+package service;
 
-import com.example.springboottutorial.domain.WedstrijdTicket;
+import domain.WedstrijdTicket;
 
 import java.util.List;
 

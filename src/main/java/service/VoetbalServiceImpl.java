@@ -1,7 +1,7 @@
-package com.example.springboottutorial.service;
+package service;
 
-import com.example.springboottutorial.domain.Wedstrijd;
-import com.example.springboottutorial.domain.WedstrijdTicket;
+import domain.Wedstrijd;
+import domain.WedstrijdTicket;
 
 import java.util.*;
 
