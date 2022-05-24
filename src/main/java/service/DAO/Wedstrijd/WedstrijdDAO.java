@@ -1,4 +1,4 @@
-package service;
+package service.DAO.Wedstrijd;
 
 import domain.Stadion;
 import domain.Wedstrijd;

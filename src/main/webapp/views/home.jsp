@@ -23,6 +23,5 @@
         voer uit
     </button>
 </form:form>
-
 </body>
 </html>

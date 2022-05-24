@@ -11,8 +11,7 @@
 </head>
 <body>
 <h1>Fifa World Cup Qatar 2022</h1>
-<h1>${stadion}</h1>
-<h2>${tickets}</h2>
+<h1>${tickets[0].getStadion()}</h1>
 <table>
     <tr>
         <th>Nr</th>
@@ -24,9 +23,13 @@
     <c:forEach items="${tickets}" var="ticket">
         <c:set var="match" value="${ticket}"/>
         <tr>
-            <td>
-                ${match.id}
-            </td>
+
+                <td>
+                    <a href="/fifa/${match.id}">
+                        ${match.id}
+                    </a>
+                </td>
+
             <td>
                 ${match.getLanden()[0]}-${match.getLanden()[1]}
             </td>

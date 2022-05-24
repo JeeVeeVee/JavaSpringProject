@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.*;
 @Retention(RUNTIME)
 public @interface ValidEmail {
 
-    String message() default "you must include a valid email";
+    String message() default "{validEmail.message}";
     Class<?>[] groups() default{};
     Class<? extends Payload>[] payload() default {};
 }

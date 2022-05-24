@@ -1,5 +1,6 @@
 package domain;
 
+import org.springframework.beans.factory.annotation.Required;
 import validator.validEmail.ValidEmail;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -17,17 +18,22 @@ public class TicketOrder {
     private Long id;
 
     @NotNull(message = "moet ingevuld zijn")
+    @NotEmpty(message = "moet ingevulddd zijn")
     @ValidEmail
     private String email;
 
+    @NotNull(message = "moet ingevuld zijn ")
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Min(1)
     @Max(25)
     private Integer aantalTickets = 1;
 
+    @NotNull(message = "moet ingevuld zijn ")
     @Min(1)
     @Max(25)
     private Integer voetbalCode1 = 10;
 
+    @NotNull(message = "moet ingevuld zijn ")
     @Min(1)
     @Max(25)
     @NumberFormat()

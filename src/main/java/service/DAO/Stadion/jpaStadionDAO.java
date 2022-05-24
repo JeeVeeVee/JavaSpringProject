@@ -1,4 +1,4 @@
-package service;
+package service.DAO.Stadion;
 
 import domain.Stadion;
 import org.springframework.stereotype.Repository;
@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository("stadionDAO")
-public class jpaStadionDAO implements StadionDAO{
+public class jpaStadionDAO implements StadionDAO {
 
     @PersistenceContext
     private EntityManager em;

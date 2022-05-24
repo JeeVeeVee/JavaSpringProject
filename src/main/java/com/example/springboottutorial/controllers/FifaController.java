@@ -2,9 +2,9 @@ package com.example.springboottutorial.controllers;
 
 import domain.Stadion;
 import domain.TicketOrder;
-import service.StadionDAO;
+import service.DAO.Stadion.StadionDAO;
 import service.VoetbalService;
-import service.WedstrijdDAO;
+import service.DAO.Wedstrijd.WedstrijdDAO;
 import validator.TicketOrderValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,16 +35,16 @@ public class FifaController {
     private String email;
 
     @GetMapping
-    public String courtReservation(Model model) {
+    public String home(Model model) {
         model.addAttribute("stadionlist", stadionDAO.findAll());
-        model.addAttribute("stadion", new Stadion());
+        model.addAttribute("stadion", new Stadion(""));
         return "home";
     }
 
-    @PostMapping
-    public String postmapping( @ModelAttribute Stadion stadion, BindingResult result, Model model){
+    @PostMapping("/")
+    public String postmapping( @ModelAttribute Stadion stadion, Model model){
         model.addAttribute("tickets", wedstrijdDAO.findInStadion(stadion));
-        model.addAttribute("stadion", stadion);
+        model.addAttribute("plek", stadion.getName());
         return "stadion";
     }
 

@@ -58,10 +58,7 @@ public class Stadion implements Serializable {
 
     @Override
     public String toString() {
-        return "Stadion{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return name;
     }
 
 }

@@ -1,9 +1,8 @@
-package service;
+package service.DAO.Wedstrijd;
 
 import domain.Stadion;
 import domain.Wedstrijd;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
