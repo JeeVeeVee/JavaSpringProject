@@ -11,9 +11,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 
-@Entity
 public class TicketOrder {
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -38,6 +36,22 @@ public class TicketOrder {
     @Max(25)
     @NumberFormat()
     private Integer voetbalCode2 = 20;
+
+
+    private Integer beschikbareTickets = 0;
+
+    public Integer getBeschikbareTickets() {
+        return beschikbareTickets;
+    }
+
+    public void setBeschikbareTickets(Integer beschikbareTickets) {
+        this.beschikbareTickets = beschikbareTickets;
+    }
+
+
+    public TicketOrder(Wedstrijd wedstrijd) {
+        //this.beschikbareTickets = wedstrijd.getTickets_left();
+    }
 
 
 

@@ -2,6 +2,7 @@ package com.example.springboottutorial.controllers;
 
 import domain.Stadion;
 import domain.TicketOrder;
+import domain.Wedstrijd;
 import service.DAO.Stadion.StadionDAO;
 import service.VoetbalService;
 import service.DAO.Wedstrijd.WedstrijdDAO;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/fifa")
+@RequestMapping("/fifa/")
 public class FifaController {
 
     @Autowired
@@ -50,14 +51,18 @@ public class FifaController {
 
     @RequestMapping("/{matchId}")
     public String matchDetail(@PathVariable(value="matchId") String id, Model model){
-        model.addAttribute("wedstrijd", wedstrijdDAO.findById(Long.valueOf(id)));
-        model.addAttribute("ticketOrder", new TicketOrder());
+        Wedstrijd wedstrijd =  wedstrijdDAO.findById(Long.valueOf(id));
+        model.addAttribute("wedstrijd",wedstrijd);
+        TicketOrder ticketOrder = new TicketOrder(wedstrijd);
+        model.addAttribute("ticketOrder", ticketOrder);
         return "detail";
     }
 
     @PostMapping("/{matchId}")
-    public String buyTickets(@Valid @ModelAttribute TicketOrder order, BindingResult bindingResult, Model model) {
+    public String buyTickets(@PathVariable(value="matchId") String id, @Valid @ModelAttribute TicketOrder order, BindingResult bindingResult, Model model) {
         ticketOrderValidator.validate(order, bindingResult);
+        Wedstrijd wedstrijd =  wedstrijdDAO.findById(Long.valueOf(id));
+        model.addAttribute("wedstrijd",wedstrijd);
         if(bindingResult.hasErrors()){
             return "detail";
         }

@@ -32,11 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.formLogin().
-                defaultSuccessUrl("/", true);
+                defaultSuccessUrl("/fifa/", true);
 
 
         http.authorizeRequests()
-                .antMatchers("/fifa").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/fifa/").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/fifa/{matchId}").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
