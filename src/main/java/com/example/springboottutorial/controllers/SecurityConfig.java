@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/fifa/").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/fifa/logout").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/fifa/{matchId}").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()

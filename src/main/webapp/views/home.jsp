@@ -11,17 +11,20 @@
 </head>
 <body>
 <h1>Fifa World Cup Qatar 2022</h1>
+<h2>${ordered_tickets}</h2>
 <form:form method="POST" modelAttribute="stadion">
     <label>pick a stadium</label>
     <form:select  path="id">
         <form:options items="${stadionlist}" itemValue="id"/>
-        <%--<c:forEach items="${stadionlist}" var="stadion">
-            <option value="${stadion.toString()}">${stadion.toString()}</option>
-        </c:forEach>--%>
     </form:select>
     <button type="submit">
         voer uit
     </button>
 </form:form>
+
+<form action='logout' method='post'>
+    <input type="submit" value="Log out" />
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
 </body>
 </html>
