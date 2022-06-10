@@ -13,7 +13,7 @@
 <h1>Fifa World Cup Qatar 2022</h1>
 <h2>${ordered_tickets}</h2>
 <form:form method="POST" modelAttribute="stadion">
-    <label>pick a stadium</label>
+    <label>kies een stadion</label>
     <form:select  path="id">
         <form:options items="${stadionlist}" itemValue="id"/>
     </form:select>

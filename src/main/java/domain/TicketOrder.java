@@ -12,19 +12,16 @@ import javax.validation.constraints.*;
 
 
 public class TicketOrder {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @NotNull(message = "moet ingevuld zijn")
-    @NotEmpty(message = "moet ingevulddd zijn")
+    @NotNull(message = "{validation.empty}")
+    @NotEmpty(message = "moet ingevuld zijn")
     @ValidEmail
     private String email;
 
-    @NotNull(message = "moet ingevuld zijn ")
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @NotNull(message = "{validation.empty}")
     @Min(1)
     @Max(25)
-    private Integer aantalTickets = 1;
+    private int aantalTickets = 1;
 
     @NotNull(message = "moet ingevuld zijn ")
     @Min(1)
@@ -49,7 +46,7 @@ public class TicketOrder {
     }
 
 
-    public TicketOrder(Wedstrijd wedstrijd) {
+    public TicketOrder() {
         //this.beschikbareTickets = wedstrijd.getTickets_left();
     }
 
@@ -85,15 +82,5 @@ public class TicketOrder {
 
     public void setVoetbalCode2(int voetbalCode2) {
         this.voetbalCode2 = voetbalCode2;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
-    public Long getId() {
-        return id;
     }
 }

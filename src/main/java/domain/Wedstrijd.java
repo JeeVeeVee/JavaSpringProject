@@ -95,6 +95,6 @@ public class Wedstrijd {
 
     @Override
     public String toString() {
-        return "Wedstrijd{" + "id=" + id + ", thuisland='" + thuisland + '\'' + ", uitland='" + uitland + '\'' + ", dag=" + dag + ", uur=" + uur + ", tickets_left=" + tickets_left + ", stadion=" + stadion + '}';
+        return thuisland + " tegen " + uitland + " op "  + dag + " december,  om " + uur + ":00, in "  + stadion;
     }
 }

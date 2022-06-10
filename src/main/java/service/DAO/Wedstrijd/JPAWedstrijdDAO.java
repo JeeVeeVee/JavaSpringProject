@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository("wedstrijdDAO")
@@ -32,6 +33,13 @@ public class JPAWedstrijdDAO implements WedstrijdDAO {
     public Wedstrijd findById(Long id) {
         TypedQuery<Wedstrijd> query = em.createNamedQuery("Wedstrijd.byID", Wedstrijd.class).setParameter("id", id);
         return query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void koopTickets(Wedstrijd wedstrijd, int aantalTickets) {
+        wedstrijd.setTickets_left(wedstrijd.getTickets_left() - aantalTickets);
+        em.persist(wedstrijd);
     }
 }
 

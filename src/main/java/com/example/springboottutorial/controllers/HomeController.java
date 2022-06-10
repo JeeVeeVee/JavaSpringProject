@@ -8,7 +8,7 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String showHomePage() {
-		return "redirect:/fifa";
+		return "redirect:/fifa/";
 	}
 
 

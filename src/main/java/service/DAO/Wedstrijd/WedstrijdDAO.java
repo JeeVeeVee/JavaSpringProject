@@ -9,4 +9,5 @@ public interface WedstrijdDAO {
     public List<Wedstrijd> findAll();
     public List<Wedstrijd> findInStadion(Stadion stadion);
     public Wedstrijd findById(Long id);
+    public void koopTickets(Wedstrijd wedstrijd, int aantalTickets);
 }

@@ -16,8 +16,8 @@ public class TicketOrderValidator implements Validator {
         if(ticketOrder.getVoetbalCode1() > ticketOrder.getVoetbalCode2()){
             errors.rejectValue("voetbalCode1", "voetbalcode1 moet kleiner zijn dan voetbalcode 2","voetbalcode1 moet kleiner zijn dan voetbalcode 2");
         }
-        if(ticketOrder.getAantalTickets() == ticketOrder.getBeschikbareTickets()){
+       // if(ticketOrder.getAantalTickets() == ticketOrder.getBeschikbareTickets()){
            // errors.rejectValue("aantalTickets", "Je kocht meer tickets dan er beschikbaar waren", "Je kocht meer tickets dan er beschikbaar waren");
-        }
+        //}
     }
 }

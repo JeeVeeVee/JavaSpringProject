@@ -4,6 +4,7 @@ import domain.Stadion;
 import domain.TicketOrder;
 import domain.Wedstrijd;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import service.DAO.Stadion.StadionDAO;
 import service.VoetbalService;
 import service.DAO.Wedstrijd.WedstrijdDAO;
@@ -37,7 +38,9 @@ public class FifaController {
 
     @ModelAttribute("redirectOrder")
     public TicketOrder redirectOrder() {
-        return new TicketOrder(new Wedstrijd());
+        TicketOrder ticketOrder = new TicketOrder();
+        ticketOrder.setAantalTickets(0);
+        return ticketOrder;
     }
 
     @Value("#{ messageSource.getMessage('admin.email',null,'en')}")
@@ -46,9 +49,17 @@ public class FifaController {
     @GetMapping
     public String home( @ModelAttribute("redirectOrder") TicketOrder order, Model model) {
         if(order != null){
-            model.addAttribute("ordered_tickets", "you ordered tickets");
+            if(order.getAantalTickets() == 0){
+                model.addAttribute("ordered_tickets", "Je bestelde voorlopig nog geen tickets");
+            } else if (order.getAantalTickets() == 1){
+                model.addAttribute("ordered_tickets", "je kocht 1 ticket");
+            } else {
+                model.addAttribute("ordered_tickets", "je kocht " + Integer.toString(order.getAantalTickets()) +  " tickets");
+            }
+        }else {
+            model.addAttribute("ordered_tickets", "you no buy fo so");
         }
-        model.addAttribute("ordered_tickets", "you no buy tickets");
+        model.addAttribute("debug", order);
         model.addAttribute("stadionlist", stadionDAO.findAll());
         model.addAttribute("stadion", new Stadion(""));
         return "home";
@@ -62,26 +73,33 @@ public class FifaController {
     }
 
     @RequestMapping("/{matchId}")
-    public String matchDetail(@PathVariable(value="matchId") String id, Model model){
+    public String matchDetail( @ModelAttribute("redirectOrder") TicketOrder order, @PathVariable(value="matchId") String id, Model model){
         Wedstrijd wedstrijd =  wedstrijdDAO.findById(Long.valueOf(id));
         model.addAttribute("wedstrijd",wedstrijd);
-        TicketOrder ticketOrder = new TicketOrder(wedstrijd);
-        model.addAttribute("ticketOrder", ticketOrder);
+        order.setAantalTickets(1);
+        model.addAttribute("ticketOrder", order);
         return "detail";
     }
 
     @PostMapping("/{matchId}")
-    public String buyTickets(@PathVariable(value="matchId") String id, @Valid @ModelAttribute TicketOrder order, BindingResult bindingResult, Model model, RedirectAttributes redirectOrder ){
-        ticketOrderValidator.validate(order, bindingResult);
-        Wedstrijd wedstrijd =  wedstrijdDAO.findById(Long.valueOf(id));
-        model.addAttribute("wedstrijd",wedstrijd);
-        if(bindingResult.hasErrors()){
+    public String buyTickets( @ModelAttribute("redirectOrder") TicketOrder sessionOrder, @PathVariable(value="matchId") String id,@Valid @ModelAttribute TicketOrder order, BindingResult bindingResult, Model model, RedirectAttributes redirectOrder ){
+        try {
+            ticketOrderValidator.validate(order, bindingResult);
+            Wedstrijd wedstrijd =  wedstrijdDAO.findById(Long.valueOf(id));
+            model.addAttribute("wedstrijd",wedstrijd);
+            if(bindingResult.hasErrors()){
+                return "detail";
+            }
+        } catch (Exception e){
             return "detail";
         }
-        model.addAttribute("ticket", voetbalService.getWedstrijd(
-                "4"
-        ));
-        redirectOrder.addFlashAttribute("redirectOrder" ,order);
+        Wedstrijd wedstrijd =  wedstrijdDAO.findById(Long.valueOf(id));
+        model.addAttribute("wedstrijd",wedstrijd);
+        wedstrijdDAO.koopTickets(wedstrijd, sessionOrder.getAantalTickets());
+        sessionOrder.setAantalTickets(order.getAantalTickets());
+        redirectOrder.addFlashAttribute("redirectOrder" ,sessionOrder);
+        //model.addAttribute("ticketOrder", sessionOrder);
+        //return "debug";
         return "redirect:/fifa/";
     }
 
